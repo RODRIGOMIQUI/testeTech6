@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Search from '../search/search';
+import AppRoutes from './appRoutes';
+
 import './app.css';
 
 const App = () => {
@@ -7,9 +8,9 @@ const App = () => {
     <div className="app">
       <br />
       <div className="container">
-        <Search name="Search" />
-      </div>
-    </div>
+        <AppRoutes />
+      </div>      
+    </div>    
   );
 };
 

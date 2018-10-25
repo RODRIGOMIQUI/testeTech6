@@ -8,7 +8,7 @@ import multi from 'redux-multi';
 import thunk from 'redux-thunk';
 
 import App from './main/app';
-import reducers from './reducers';
+import reducers from './store/reducers';
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
