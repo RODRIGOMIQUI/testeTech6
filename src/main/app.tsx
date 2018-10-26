@@ -1,4 +1,6 @@
 import * as React from 'react';
+import DocumentTitle from 'react-document-title';
+
 import AppRoutes from './appRoutes';
 
 import './app.css';
@@ -8,7 +10,9 @@ const App = () => {
     <div className="app">
       <br />
       <div className="container">
-        <AppRoutes />
+        <DocumentTitle title='Tech6 - Teste ReactJS'>
+          <AppRoutes />
+        </DocumentTitle>
       </div>      
     </div>    
   );

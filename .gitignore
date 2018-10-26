@@ -22,3 +22,6 @@ yarn-error.log*
 
 # visual studio
 github-app.code-workspace
+
+# env
+.env
