@@ -11,9 +11,6 @@ const RepositoryItem = ({
   primaryLanguage,
   owner,
   stargazers,
-  watchers,
-  viewerSubscription,
-  viewerHasStarred,
 }) => (
   <div>
     <div className="RepositoryItem-title">

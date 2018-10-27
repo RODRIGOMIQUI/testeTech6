@@ -5,12 +5,13 @@ import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import * as dotenv from "dotenv";
 
 //import Profile from './profile';
 //import Repository from './repository';
 import Users from './users';
 
-const token = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
+dotenv.load();
 
 const GITHUB_BASE_URL = 'https://api.github.com/graphql';
 
@@ -26,8 +27,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const httpLink = new HttpLink({
   uri: GITHUB_BASE_URL,
   headers: {
-    authorization: 'bearer 6b14769c639b73bf0aebea08cc414dede33645c6',
-    //authorization: `bearer ${token}`,
+    authorization: `bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
   },
 });
 
@@ -42,7 +42,7 @@ const client = new ApolloClient({
 
 const Grid = () => {
   return (
-    <ApolloProvider client={client}>    
+    <ApolloProvider client={client}>
       <Users />
     </ApolloProvider>        
   );

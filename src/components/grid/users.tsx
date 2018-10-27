@@ -1,42 +1,45 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Loading from './loading';
 import ErrorMessage from './errorMessage';
 import UserList from './userList';
+import { onChangeloginSearch } from '../searchBar/searchBarActions';
 
 import './style.css';
 
 const GET_USERS = gql`
-{
-  search(query: "juliana", type: USER, first: 10) {
-    userCount    
-    edges {
-      node {        
-        ... on User {
-          id
-          name
-          login
-          avatarUrl
-          repositories {
-            totalCount
-          }          
-          followers {
-            totalCount
-          }
-          following {
-            totalCount
+  query getUsers($loginSearch: String!) {
+    search(query: $loginSearch, type: USER, first: 10) {
+      userCount    
+      edges {
+        node {        
+          ... on User {
+            id
+            name
+            login
+            avatarUrl
+            repositories {
+              totalCount
+            }          
+            followers {
+              totalCount
+            }
+            following {
+              totalCount
+            }
           }
         }
       }
     }
   }
-}
 `;
 
-const Users = () => (
-  <Query query={GET_USERS}>
+const Users = ({ loginSearch }) => (  
+  <Query query={GET_USERS} variables={{ loginSearch }}>
     {({ data, loading, error }) => {
       if (error) {
         return <ErrorMessage error={error} />;
@@ -65,11 +68,14 @@ const Users = () => (
             <UserList users={search} />
           </tbody>
         </table>
-        </div>        
+        </div>
       );
     }}
   </Query>
 );  
 
-export default Users;
+const mapStateToProps = state => ({ loginSearch: state.search.loginSearch })
+const mapDispatchToProps = dispatch => bindActionCreators({ onChangeloginSearch: onChangeloginSearch }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
 

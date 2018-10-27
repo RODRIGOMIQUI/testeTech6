@@ -1,7 +1,5 @@
 import * as React from 'react';
-
 import UserLink from './userLink';
-
 import './style.css';
 
 const UserItem = ({
@@ -13,8 +11,8 @@ const UserItem = ({
   followers,
   following,
 }) => (
-  <tr>
-      <td><UserLink href=""><img src={avatarUrl} height="40" width="40"></img></UserLink></td>
+  <tr key={id}>
+      <td><UserLink href={"/user/" + login} target='_top'><img src={avatarUrl} height="40" width="40"></img></UserLink></td>
       <td>{name}</td>
       <td>{login}</td>
       <td>{repositories.totalCount}</td>
